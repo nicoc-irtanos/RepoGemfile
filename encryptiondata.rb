@@ -1,15 +1,15 @@
 def chiffre_de_cesar(string, shift)
-  ascii = string.chars.map{|i| i.ord}
-  shifted = ascii.map{|j|
-    if (j >= 65 && j <=90) || (j >=97 && j <= 122) then
-       j + shift
-    elsif
+  encrypted = string.chars.map(&:ord).map do |j|
+    if j.between?(65, 90)
+      ((j - 65 + shift) % 26) + 65
+    elsif j.between?(97, 122)
+      ((j - 97 + shift) % 26) + 97
     else
       j
     end
-     }
-  encrypted = shifted.map{|c| c.chr }.join
-  puts encrypted
+  end
+  encrypted_2 = encrypted.map(&:chr).join
+  puts encrypted_2
 end
 
 chiffre_de_cesar("What a string!", 5)
